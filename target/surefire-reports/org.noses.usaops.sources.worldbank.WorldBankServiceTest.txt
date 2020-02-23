@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.noses.usaops.sources.worldbank.WorldBankServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.52 s - in org.noses.usaops.sources.worldbank.WorldBankServiceTest
