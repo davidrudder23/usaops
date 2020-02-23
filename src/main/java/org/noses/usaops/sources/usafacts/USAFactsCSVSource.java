@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.noses.usaops.sources.opendatasuicide.OpenDataSuicide;
 
 import java.io.IOException;
 import java.io.StringReader;

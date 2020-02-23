@@ -1,8 +1,6 @@
 package org.noses.usaops.sources.usafacts;
 
-import org.noses.usaops.sources.usafacts.USAFactsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,4 +21,14 @@ public class USAFactsResource {
 
         return "loaded";
     }
+
+    @RequestMapping("/governmentemployment")
+    @ResponseBody
+    @Transactional(readOnly = true)
+    public String loadGovernmentEmployment() {
+        usaFactsService.loadGovernmentEmployment();
+
+        return "loaded";
+    }
+
 }

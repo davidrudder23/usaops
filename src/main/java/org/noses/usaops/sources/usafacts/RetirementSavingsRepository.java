@@ -1,10 +1,10 @@
 package org.noses.usaops.sources.usafacts;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+@Repository
+public interface RetirementSavingsRepository extends JpaRepository<RetirementSavings, Long> {
 
-public interface RetirementSavingsRepository extends CrudRepository<RetirementSavings, Long> {
-
-    public List<RetirementSavings> findByYear(int year);
+    RetirementSavings findByYear(Long year);
 }

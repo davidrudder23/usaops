@@ -1,7 +1,5 @@
 package org.noses.usaops.sources.usafacts;
 
-import lombok.Data;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.util.StringUtils;
@@ -24,15 +22,15 @@ public class RetirementSavingsSource extends USAFactsCSVSource<RetirementSavings
 
         int yearOffset = 0;
         try {
-            while (!StringUtils.isEmpty(csvRecords.get(1).get(yearOffset + 1))) {
+            while ((yearOffset+1)<csvRecords.get(1).size() && (!StringUtils.isEmpty(csvRecords.get(1).get(yearOffset + 1)))) {
                 int yearCol = yearOffset + 1;
-                int year = Integer.parseInt(csvRecords.get(1).get(yearCol));
+                long year = Long.parseLong(csvRecords.get(1).get(yearCol));
 
                 RetirementSavings retirementSavings = new RetirementSavings();
                 retirementSavings.setYear(year);
-                retirementSavings.setContributions401k(new BigDecimal(csvRecords.get(2).get(yearCol)));
-                retirementSavings.setAssets401k(new BigDecimal(csvRecords.get(4).get(yearCol)));
-                retirementSavings.setParticipants401k(new BigInteger(csvRecords.get(13).get(yearCol)));
+                retirementSavings.setContributions401k(new BigDecimal(cleanUp(csvRecords.get(2).get(yearCol))));
+                retirementSavings.setAssets401k(new BigDecimal(cleanUp(csvRecords.get(4).get(yearCol))));
+                retirementSavings.setParticipants401k(new BigInteger(cleanUp(csvRecords.get(13).get(yearCol))));
 
                 yearOffset++;
 
@@ -44,6 +42,18 @@ public class RetirementSavingsSource extends USAFactsCSVSource<RetirementSavings
 
         log.debug("retirement list = {}", retirementSavingsList);
         return retirementSavingsList;
+    }
+
+    private String cleanUp(String input) {
+        if (StringUtils.isEmpty(input)) {
+            return "0";
+        }
+
+        if (input.equalsIgnoreCase("n/a")) {
+            return "0";
+        }
+
+        return input;
     }
 }
 
